@@ -1,8 +1,9 @@
-var createPolitician = function (name){
+var createPolitician = function (name, partyColor){
   var politician= {};
   politician.name = name;
   politician.electionResults= null;
   politician.totalVotes = 0; 
+  politician.partyColor= partyColor;
   politician.tallyUpTotalVotes= function (){ 
     this.totalVotes=0; 
     for (var i=0; i<this.electionResults.length; i++){
@@ -11,8 +12,8 @@ var createPolitician = function (name){
   };
    return politician;
 };
-var candidate1=createPolitician("Trump"); 
-var candidate2=createPolitician("Obama");
+var candidate1=createPolitician("Trump", [132, 17, 11]); 
+var candidate2=createPolitician("Clinton", [245, 141, 136]);
 
 candidate1.electionResults=[5,1,7,2,33,6,4,2,1,14,8,3,1,11,11,0,5,3,3,3,7,4,8,9,3,7,2,2,4,2,8,3,15,15,2,12,0,4,13,1,3,2,8,21,3,2,11,1,3,7,2];
 
@@ -28,6 +29,24 @@ candidate2.electionResults[4]=38;
 candidate1.electionResults[43]=11; 
 candidate2.electionResults[43]=27; 
 
+// setStateResults  function for setting the state results with state as parameter
+
+var setStateResults = function (state){
+    theStates[state].winner = null;
+    if (candidate1.electionResults[state] > candidate2.electionResults[state]){
+      theStates[state].winner = candidate1;
+    } else if (candidate2.electionResults[state]> candidate1.electionResults[state]){
+      theStates[state].winner = candidate2;
+    }
+  //var stateWinner to connect state with color of the state winner
+  var stateWinner = theStates[state].winner;
+    if (stateWinner !== null){
+      theStates[state].rgbColor= stateWinner.partyColor; 
+    } else {
+      theStates[state].rgbColor= [11, 32, 57];
+  }
+};
+    
 // connect candidate with total Votes
 
 candidate1.tallyUpTotalVotes(); 
@@ -41,7 +60,7 @@ console.log(candidate1.totalVotes);
 console.log(candidate2.totalVotes);
 
 
-/* create var winner. Use if / else statements to determine which of your politician has the most votes, and whether the overall election is a draw.then console.log*/ 
+//var winner determines which of your politician has the most votes, and whether the overall election is a draw. 
 
 var winner; 
 
@@ -55,4 +74,10 @@ if (candidate1.totalVotes===candidate2.totalVotes){
 
 console.log("And the winner is: "+winner+"!!!");
 
+// created partyColor parameter, connected it to each candidate
 
+console.log("Trump's color is: "+candidate1.partyColor);
+console.log("Clinton's color is: "+candidate2.partyColor);
+
+
+    
