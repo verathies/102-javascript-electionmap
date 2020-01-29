@@ -49,8 +49,18 @@ var setStateResults = function (state){
     } else {
       theStates[state].rgbColor= [11, 32, 57];
   }
-   // populate interactive table stateResults 
-   var stateInfoTable= document.getElementById('stateResults');
+  // populate static table countryResults to announce the winners
+
+var countryInfoTable = document.getElementById('countryResults');
+
+countryInfoTable.children[0].children[0].children[0].innerText=candidate1.name;
+countryInfoTable.children[0].children[0].children[1].innerText= candidate1.totalVotes;
+countryInfoTable.children[0].children[0].children[2].innerText=candidate2.name;
+countryInfoTable.children[0].children[0].children[3].innerText= candidate2.totalVotes;
+countryInfoTable.children[0].children[0].children[5].innerText= winner;
+
+ // populate interactive table stateResults 
+  var stateInfoTable= document.getElementById('stateResults');
   
    var header= stateInfoTable.children[0].children[0];
      var stateName= header.children[0];
@@ -64,13 +74,13 @@ var setStateResults = function (state){
      candidate1Name.innerText=candidate1.name;
      
      var candidate1Results=body.children[0].children[1];
-     candidate1Results.innerText= theStates[state].candidate1.electionResults
+     candidate1Results.innerText= candidate1.electionResults[state];
        
      var candidate2Name= body.children[1].children[0];
      candidate2Name.innerText= candidate2.name;
    
      var candidate2Results= body.children[1].children[1];
-     candidate2Results.innerText=theStates[state].candidate2.electionResults
+     candidate2Results.innerText=candidate2.electionResults[state];
        
      var winnersName=body.children[2].children[1];
      //if else statement for winner
@@ -79,7 +89,6 @@ var setStateResults = function (state){
      } else {
       winnersName.innerText= theStates[state].winner.name;
      }
-
 };
     
 // connect candidate with total Votes
@@ -114,13 +123,3 @@ console.log("And the winner is: "+winner+"!!!");
 console.log("Trump's color is: "+candidate1.partyColor);
 console.log("Clinton's color is: "+candidate2.partyColor);
 
-// populate static table countryResults to announce the winners
-
-var countryInfoTable = document.getElementById('countryResults');
-
-  countryInfoTable.children[0].children[0].children[0].innerText=candidate1.name;
-  countryInfoTable.children[0].children[0].children[1].innerText= candidate1.totalVotes;
-  countryInfoTable.children[0].children[0].children[2].innerText=candidate2.name;
-  countryInfoTable.children[0].children[0].children[3].innerText= candidate2.totalVotes;
-  countryInfoTable.children[0].children[0].children[5].innerText= winner;
-    
